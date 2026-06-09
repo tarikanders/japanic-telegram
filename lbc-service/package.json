@@ -1,0 +1,17 @@
+{
+  "name": "lbc-service",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "./node_modules/.bin/esbuild server.ts --bundle --platform=node --outfile=server.cjs --format=cjs",
+    "start": "node server.cjs",
+    "dev": "./node_modules/.bin/esbuild server.ts --bundle --platform=node --outfile=server.cjs --format=cjs && node server.cjs"
+  },
+  "dependencies": {
+    "leboncoin-api-search": "latest"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.0",
+    "tsx": "^4.22.4"
+  }
+}

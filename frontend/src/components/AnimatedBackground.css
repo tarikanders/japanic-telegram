@@ -1,0 +1,45 @@
+.anim-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Couche floue par-dessus les blobs */
+.anim-bg-overlay {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(60px);
+  -webkit-backdrop-filter: blur(60px);
+  background: rgba(234,232,242,0.35);
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.45;
+  filter: blur(0px); /* flou supplémentaire géré par l'overlay */
+}
+
+.blob-1 {
+  width: 600px; height: 600px;
+  top: -120px; left: -80px;
+  background: radial-gradient(circle at 40% 40%, var(--violet-l), transparent 70%);
+  animation: blobFloat1 18s ease-in-out infinite;
+}
+
+.blob-2 {
+  width: 500px; height: 500px;
+  bottom: -100px; right: -60px;
+  background: radial-gradient(circle at 60% 60%, var(--pink), transparent 70%);
+  animation: blobFloat2 22s ease-in-out infinite;
+}
+
+.blob-3 {
+  width: 400px; height: 400px;
+  top: 40%; left: 45%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 50% 50%, var(--teal), transparent 70%);
+  animation: blobFloat3 26s ease-in-out infinite;
+}

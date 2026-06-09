@@ -1,0 +1,17 @@
+.env
+*.db
+*.db-shm
+*.db-wal
+*.db.backup_*
+*.db.pre_*
+*.session
+telegram_session*
+__pycache__/
+*.pyc
+.pytest_cache/
+backend/static/
+node_modules/
+frontend/dist/
+.DS_Store
+*.log
+.claude/

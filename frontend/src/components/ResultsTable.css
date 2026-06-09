@@ -1,0 +1,174 @@
+.table-section { margin-top: 4px; }
+
+.table-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 0 4px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.table-count    { font-size: 12px; color: var(--text-3); font-weight: 500; }
+.table-pagination { font-size: 12px; color: var(--text-3); }
+
+/* Scrollable container */
+.table-wrap {
+  background: var(--base);
+  box-shadow: var(--neu-raised);
+  border-radius: var(--r);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 560px; /* ensures scroll on mobile */
+}
+
+.results-table thead tr {
+  border-bottom: 1px solid rgba(124,58,237,0.08);
+}
+
+.results-table th {
+  padding: 14px 14px;
+  text-align: left;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+  color: var(--text-3);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.result-row {
+  cursor: pointer;
+  border-bottom: 1px solid rgba(124,58,237,0.05);
+  transition: background 0.15s;
+}
+
+.result-row:hover { background: rgba(124,58,237,0.04); }
+.result-row:last-child { border-bottom: none; }
+
+.results-table td {
+  padding: 13px 14px;
+  color: var(--text-2);
+  white-space: nowrap;
+}
+
+.lot-num    { color: var(--text-3); font-size: 11px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.model-cell { color: var(--text-1); font-weight: 700; }
+.price-final { color: var(--text-1); font-weight: 700; font-variant-numeric: tabular-nums; }
+.price-yen   { color: var(--amber); font-weight: 600; font-variant-numeric: tabular-nums; }
+.text-muted  { color: var(--text-3); }
+
+/* Finition / variant — badge discret */
+.variant-cell { white-space: nowrap; }
+.variant-badge {
+  display: inline-block;
+  background: var(--violet-d);
+  color: var(--violet);
+  padding: 2px 9px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+.year-cell { display: flex; align-items: center; gap: 5px; }
+
+.conf-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  box-shadow: var(--neu-raised-xs);
+  white-space: nowrap;
+}
+
+.badge-green  { color: var(--green); }
+.badge-red    { color: var(--red); }
+.badge-yellow { color: var(--amber); }
+
+.table-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-3);
+  background: var(--base);
+  box-shadow: var(--neu-raised);
+  border-radius: var(--r);
+}
+
+.empty-icon { font-size: 36px; margin-bottom: 12px; opacity: 0.35; }
+.table-empty p { font-size: 14px; color: var(--text-2); }
+
+/* Pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+.page-numbers { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; }
+
+.page-btn {
+  background: var(--base);
+  box-shadow: var(--neu-raised-sm);
+  border: none;
+  color: var(--text-3);
+  padding: 8px 13px;
+  border-radius: var(--r-xs);
+  font-size: 13px;
+  font-weight: 600;
+  transition: var(--t);
+  min-height: 36px;
+  min-width: 36px;
+}
+
+.page-btn:hover:not(:disabled) {
+  color: var(--violet);
+  box-shadow: 5px 5px 14px rgba(166,158,205,0.45), -3px -3px 9px rgba(255,255,255,0.9);
+}
+
+.page-btn.active {
+  box-shadow: var(--neu-inset-sm);
+  color: var(--violet);
+  font-weight: 700;
+}
+
+.page-btn:disabled { opacity: 0.3; cursor: not-allowed; box-shadow: none; }
+
+/* Sort */
+.sortable-th { cursor: pointer; transition: color 0.15s; }
+.sortable-th:hover { color: var(--text-2) !important; }
+.sort-active  { color: var(--violet) !important; }
+.sort-arrow   { font-size: 9px; opacity: 0.5; margin-left: 2px; }
+.sort-active .sort-arrow { opacity: 1; }
+.yen-col { color: rgba(217,119,6,0.6); }
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  .results-table th,
+  .results-table td { padding: 11px 10px; }
+  .results-table { font-size: 12px; }
+  .yen-col, .price-yen { display: none; } /* hide yen on mobile */
+}

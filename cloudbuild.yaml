@@ -1,0 +1,45 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - '$_REGION-docker.pkg.dev/$PROJECT_ID/$_REPO/$_SERVICE:$COMMIT_SHA'
+      - '-t'
+      - '$_REGION-docker.pkg.dev/$PROJECT_ID/$_REPO/$_SERVICE:latest'
+      - '.'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - '--all-tags'
+      - '$_REGION-docker.pkg.dev/$PROJECT_ID/$_REPO/$_SERVICE'
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - '$_SERVICE'
+      - '--image=$_REGION-docker.pkg.dev/$PROJECT_ID/$_REPO/$_SERVICE:$COMMIT_SHA'
+      - '--region=$_REGION'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+      - '--memory=1Gi'
+      - '--cpu=1'
+      - '--min-instances=0'
+      - '--max-instances=5'
+      - '--timeout=300'
+      - '--add-volume=name=db-data,type=cloud-storage,bucket=$_BUCKET_NAME'
+      - '--add-volume-mount=volume=db-data,mount-path=/data'
+      - '--set-secrets=TELEGRAM_API_ID=telegram-api-id:latest,TELEGRAM_API_HASH=telegram-api-hash:latest,ADMIN_PASSWORD=admin-password:latest,SECRET_KEY=secret-key:latest'
+      - '--set-env-vars=DATABASE_URL=sqlite:////data/japan_auctions.db,TELEGRAM_CHANNEL=$_TELEGRAM_CHANNEL,CORS_ORIGINS=https://$_SERVICE-$PROJECT_ID.$_REGION.run.app,DATA_MIN_DATE=2025-01-01'
+
+substitutions:
+  _REGION: europe-west1
+  _REPO: japan-auction
+  _SERVICE: japan-auction-app
+  _BUCKET_NAME: japanica-japan-auction-db
+  _TELEGRAM_CHANNEL: '@japanauctionjp'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
